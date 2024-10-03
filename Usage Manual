@@ -4,6 +4,11 @@ git clone https://github.com/Aaditya8888/TCP-UDP-Server.git
 
 python3 tcp-udp server.py
 
+Before running the code, you might need to install some libraries: 
+pycryptodomex (for v3 and more), 
+pycryptodome (for v2 and more)
+clamd (scanning & analyzing files before downloading)
+
 Select 1 or 2 for TCP or UDP to receive messages 
 
 And as a sender we can use netcat.
