@@ -1,8 +1,62 @@
-# TCP-UDP-Server
-This server application is designed solely for **receiving messages** from clients through both **TCP** and **UDP** protocols. Its primary function is to act as a simple communication endpoint, where clients can send data that the server will process. The server offers users the flexibility to select the protocol they want to work with, ensuring they can experiment with both **reliable, connection-oriented TCP** and **connectionless UDP** message transfers.
+## Secure TCP/UDP Message Receiving Server
 
-Upon running the application, the server will listen on a specified port for incoming connections. In the **TCP mode**, the server establishes a formal connection with clients, ensuring that every message sent is reliably delivered and acknowledged. This makes it useful for scenarios where message integrity is essential, such as real-time chat applications or file transfers.
+### Overview
+This server application is designed to communicate securely over TCP and UDP protocols. It ensures message confidentiality, integrity, and security using encryption and user authentication. The server can receive both plain text and files (images, audio, documents) while maintaining security through AES-256 encryption and virus scanning.
 
-In **UDP mode**, the server behaves differently due to the nature of the UDP protocol. Unlike TCP, there’s no handshake or connection setup, meaning that the server does not confirm the receipt of messages in the same way. However, the server is still designed to receive and process these messages without requiring a formal connection. This can be particularly useful in lightweight scenarios where speed and efficiency are prioritized over guaranteed message delivery, such as in gaming servers or real-time streaming.
+### Features:
+1. **Login Functionality with bcrypt Hashing**:  
+   The server securely stores your credentials by hashing the username and password using the **bcrypt** algorithm when logging in. This ensures that your credentials are never stored in plain text, providing a higher level of security.
+   
+2. **Anonymous Message Reception**:  
+   Users can choose to receive messages anonymously without requiring a login.
 
-While the application is intentionally kept simple for message reception, it serves as a practical tool for testing and understanding how server-client communication works across different protocols. This server could be expanded further by adding features such as logging, response handling, or even security measures like encryption for real-world use cases. However, in its current form, it’s an ideal base for anyone looking to learn or experiment with network communications, particularly focusing on receiving data over TCP and UDP.
+3. **Message Encryption**:  
+   Messages are encrypted using **AES-256** encryption to ensure that any communication between clients and the server remains confidential. Man-in-the-middle or other eavesdropping attacks are mitigated using this encryption method.
+
+4. **Protocol Selection**:  
+   Users can choose between TCP (reliable, connection-oriented) or UDP (fast, connectionless) protocols for message reception.
+
+5. **Message Storage (for Logged-in Users Only)**:  
+   Messages are stored in encrypted format (AES-256) for logged-in users. Only the last 5 messages will be stored and displayed when requested.
+
+6. **File Reception with Antivirus Scanning**:  
+   If using UDP, users can receive files in multiple formats (images, audio, PDFs, etc.). The server scans these files for authenticity using **ClamAV** to ensure they are free from malware. Files are only available for download after passing the scan.
+
+7. **User Input Validation**:  
+   Any invalid input will prompt the user with instructions to follow the proper usage format.
+
+8. **Notice**:  
+   Users are reminded that this tool is intended for legal use only and should not be employed for malicious purposes.
+
+### Getting Started
+
+1. **Installation**:  
+   - Ensure you have Python 3 installed.
+   - Install required modules:
+     ```
+     pip install pycryptodome bcrypt clamd
+     ```
+
+2. **Running the Server**:  
+   Run the `tcp_udp_server.py` script. The server will display a banner and prompt you for login credentials or anonymous mode, as well as whether to use TCP or UDP for message reception.
+
+3. **Message Encryption**:  
+   All messages are encrypted with AES-256, ensuring confidentiality.
+
+4. **File Scanning**:  
+   Files received via UDP are scanned for viruses using ClamAV before being made available for download.
+
+### Usage
+
+1. Upon starting, you'll be prompted to either:
+   - Login with a **bcrypt-hashed username and password**, or 
+   - Continue anonymously.
+   
+2. Select either TCP or UDP for communication.  
+   - In **TCP mode**, messages will be received with reliable delivery.  
+   - In **UDP mode**, messages are received quickly without guaranteed delivery, and you can receive files.
+
+### License
+This tool is provided for educational and legal use only. Ensure you're complying with applicable laws and regulations when using this application.
+
+---
